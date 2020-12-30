@@ -1,0 +1,52 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block title %}Register{% endblock %}
+{% block content %}
+    <!-- footer -->
+    <fooetr>
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class=" col-md-12">
+                    <h2><strong class="white">Register</strong></h2>
+                  </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+
+                        <form class="main_form" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="username" type="text" name="username" value="{{ form.username.field.value | default_if_none:''}}">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                                    <input class="form-control" placeholder="First Name" type="text" name="first_name" value="{{form.username.field.value | default_if_none:''}}">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="Last Name" type="text" name="last_name" value="{{ form.last_name.field.value | default_if_none:'' }}">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="Email" type="text" name="email" value="{{ form.email.field.value | default_if_none:'' }}">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <button class="send">Register</button>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                          <br>
+
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="Password" type="password" name="password1" value="{{ form.password1.field.value | default_if_none:'' }}">
+                          </div>
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <input class="form-control" placeholder="Confirmation" type="password" name="password2" value="{{ form.password2.field.value | default_if_none:''}}">
+                          </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </fooetr>
+    <!-- end footer -->
+
+{% endblock %}

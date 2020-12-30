@@ -1,0 +1,58 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block title %}Contact Us{% endblock %}
+{% block meta_description %}This is a Contact page of our website{% endblock %}
+{% block content %}
+    <!-- footer -->
+    <fooetr>
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class=" col-md-12">
+                   {% if name %}
+                      <div style="black">
+                          <br>
+                            <center>
+                                <h2 style="color:black">Thanks {{ name }}</h2>
+                                <p>we received your email & will respond shortly...</p>
+                            </center>
+                            <br/><br/>
+                        </div>
+                      {% else %}
+                      <h2>Request  A<strong class="white"> Call  Back</strong></h2>
+                  </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                      
+                        <form action="{% url 'contact' %}" class="main_form" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="Name" type="text" name="Name">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="Email" type="text" name="Email">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="Phone" type="text" name="Phone">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <textarea class="textarea" placeholder="Message" type="text" name="Message"></textarea>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <button class="send">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="img-box">
+                            <figure><img src="{% static 'website/images/img.jpg' %}" alt="img" /></figure>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </fooetr>
+        {% endif %}
+    <!-- end footer -->
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block title %}Book a Table{% endblock %}
+{% block content %}
+    <!-- footer -->
+    <fooetr>
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class=" col-md-12">
+                  {% if user.is_authenticated %}
+                      {% if name and email and phone and address and schedule and date %}
+                        <center>
+                            <h1><strong>Review your information</strong></h1><hr style="width:50%; border: 5px solid black; border-radius: 5px ">
+                            <p><h3><strong>Your Name: </strong>{{ name.upper }}</h3></p><hr style="width:30%;">
+                            <p><h3><strong>Your E-mail: </strong>{{ email }}</h3></p><hr style="width:30%;">
+                            <p><h3><strong>Your Phone: </strong>{{ phone }}</h3></p><hr style="width:30%;">
+                            <p><h3><strong>Your Address: </strong>{{ address }}</h3></p><hr style="width:30%;">
+                            <p><h3><strong>Your Schedule: </strong>{{ schedule }}</h3></p><hr style="width:30%;">
+                            <p><h3><strong>Date: </strong>{{ date }}</h3></p>
+
+                      <br><br>
+                      <strong style="color:black">Note: </strong><p style="color:black"> This book hasn't been done yet
+                            We will contact you for your reservation.</p>
+                            <br>
+                            <strong><p style="font-weight:bold; color:black">Is your Information correct?</p></strong>
+                            <br/>
+                          <a href="{% url 'book' %}"><input type="submit" class="btn btn-outline-success btn-lg" name="send" value="&#x2714; Next"></a>
+                      </center>
+
+                      {% else %}
+                      <center><h2>Book  A<strong class="white"> Table </strong></h2></center>
+                  </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+
+                        <form action="{% url 'book' %}" class="main_form" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="Name" type="text" name="Name" value="{{ user.first_name | capfirst}} {{ user.last_name| capfirst }}">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="Email" type="text" name="Email" value="{{ user.email }}">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <input class="form-control" placeholder="Phone" type="text" name="Phone">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <button class="send">Send</button>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <br>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                 <input class="form-control" placeholder="Address" type="text" name="address">
+                             </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <input class="form-control" placeholder="from ? am/pm to ? am/pm" type="text" name="schedule">
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <input class="form-control" placeholder="Year/month/day" type="text" name="date">
+                            </div>
+                    </div>
+                  </form>
+                </div>
+        </div>
+    </fooetr>
+    {% endif %}
+    <!-- end footer -->
+    {% else %}
+    <center>
+    <p style="font-size:20px">You need to <a href="{% url 'register' %}" style="font-weight:bold">Register</a> first.</p>
+    <br><br>
+    <p style="font-size:20px">Already have an account! <a href="{% url 'login' %}" style="font-weight:bold">Login</a></p>
+    </center>
+    {% endif %}
+{% endblock %}

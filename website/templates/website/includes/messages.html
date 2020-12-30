@@ -1,0 +1,32 @@
+{% if messages %}
+    {% for message in messages %}
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            {% if message.tags == 'success' %}
+                <strong class="me-auto">&#x2714; Success</strong>
+                      <div class="toast-body">
+                          {{ message }}
+                      </div>
+            {% elif message.tags == 'info' %}
+                <strong class="me-auto">&#x2139; Info</strong>
+                    <div class="toast-body">
+                        {{message}}
+                    </div>
+
+            {% elif message.tags == 'Warning' %}
+
+                <strong class="me-auto">&#x26A0; Warning</strong>
+              </div>
+              <div class="toast-body">
+                  {{message}}
+              </div>
+            {% elif message.tags == 'error' %}
+              <strong class="me-auto">&#x2716; Error</strong>
+              </div>
+              <div class="toast-body">
+                  {{message}}
+              </div>
+</div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
