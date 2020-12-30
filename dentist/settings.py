@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-# import django_heroku
-# import dj_database_url
-# from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,11 +23,43 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'k@pv!*!a+gdh(zz#^f$9*)_aa&@yjra4n$_pr))(=m=5x9)ayo'
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TINYMCE_DEFAULT_CONFIG = {
+    'mode': 'textareas',
+    'height': 360,
+    'width': 750,
+    'images_upload_url': 'postAcceptor.php',
+    'automatic_uploads': True,
+    'block_unsupported_drop': False,
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'theme': 'modern',
+    'plugins': '''
+        textcolor save link image media preview codesample contextmenu
+        table code lists fullscreen insertdatetime nonbreaking
+        contextmenu directionality searchreplace wordcount visualblocks
+        visualchars code fullscreen autolink lists charmap print hr
+        anchor pagebreak 
+    ''',
+    'toolbar1': '''
+        fullscreen preview bold italic underline | fontselect,
+        fontsizeselect | forecolor backcolor | alignleft alignright |
+        aligncenter alignjustify | indent outdent | bullist numlist table |
+    ''',
+    'toolbar2': '''
+        visualblocks visualchars| 
+        charmap hr pagebreak nonbreaking anchor | link image |
+    ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+}
 
 # Application definition
 
@@ -42,6 +71,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
+    'tinymce',
 
 ]
 
@@ -86,7 +116,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -125,11 +154,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressManifestStaticFilesStorage'
 
 
 # https://accounts.google.com/DisplayUnlockCaptcha
@@ -144,4 +173,3 @@ EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
 
-# django_heroku.settings(locals())

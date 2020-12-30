@@ -1,5 +1,8 @@
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import TemplateView
 from . import views
+
+app_name = 'website'
 
 urlpatterns = [
     path('', views.home, name="home"),
@@ -11,4 +14,5 @@ urlpatterns = [
     path('register/', views.register, name="register"),
     path('login/', views.login_request, name="login"),
     path('logout/', views.logout_request, name="logout"),
+
 ]
