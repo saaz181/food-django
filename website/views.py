@@ -5,6 +5,28 @@ from .forms import SignUpForm
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from .models import Food, FoodCategory
+
+
+def add_to_card(request, id):
+    pass
+
+
+
+def single_slug(request, slug):
+    categories = [c.category_slug for c in FoodCategory.objects.all()]
+    if slug in categories:
+        matching_foods = Food.objects.filter(food_category__category_slug=slug)
+        foods_url = {}
+        for food in matching_foods.all():
+            foods_url[food] = food
+
+        return render(request, template_name="website/order_food.html", context={"foods": foods_url})
+
+
+
+def order_now(request):
+    return render(request, template_name="website/order.html", context={"foods": FoodCategory.objects.all})
 
 
 def home(request):
@@ -118,3 +140,5 @@ def logout_request(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect("/")
+
+

@@ -1,0 +1,35 @@
+{% extends 'website/js.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    {% include 'website/includes/messages.html' %}
+    <div class="row">
+    {% for food in foods %}
+        <div class="card mt-3 mx-4" style="width: 18rem;">
+            <div class="card-body text-center">
+                <h5 class="card-title">{{food.food_name}}</h5>
+                <p class="card-text">{{ food.food_description | safe }}</p>
+                <a class="card-link btn btn-outline-primary">{{food.food_price}}</a>
+                <a href="{{food.food_slug}}">
+                <button class="card-link btn btn-outline-success" value="{{ food.food_name }}" name="cart">&#10133; Add to cart</button>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    {%else%}
+    <div style="background-color:#666666; margin:auto; padding:auto;">  
+    <div class="container mt-5">
+  <div class="col-sm-6 col-lg-12 mt-3" style="padding: 100px 400px 200px 400px">
+  <div class="card text-center" style="width: 18rem; height: 13rem;">
+    <div class="card-body border border-danger rounded">
+      <p class="card-text"><h1>You need to Register or Login!</h1></p>
+      <a href="{% url 'register' %}" class="card-link btn btn-primary mt-5">Register</a>
+      <a href="{% url 'login' %}" class="card-link btn btn-primary mt-5">Login</a>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>    
+    {% endif %}
+{% endblock %}
